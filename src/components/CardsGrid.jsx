@@ -1,4 +1,5 @@
 import champsData from "../data/champions.json"
+import "./styling/CardsGrid.css"
 
 function CardsGrid() {
   // generate 12 random numbers from list of champs in json file
@@ -14,7 +15,6 @@ function CardsGrid() {
 
   console.log(champsData);
   console.log(gameRandomChamps);
-
   
   return (
     <>  

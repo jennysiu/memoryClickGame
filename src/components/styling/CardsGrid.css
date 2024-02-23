@@ -1,0 +1,12 @@
+/* cards grid css */
+
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}
+
+.card {
+  width: 15%;
+}
