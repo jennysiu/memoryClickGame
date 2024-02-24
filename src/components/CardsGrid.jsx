@@ -5,44 +5,33 @@ import gameRandomChamps from '../utils/champCards';
 import "./styling/CardsGrid.css"
 
 function CardsGrid( { gameStatus, setGameStatus} ) {
-  // generate 12 random numbers from list of champs in json file
-  // let gameRandomChamps = [];
-
-  // const startGame = () => {
-  //     while (gameRandomChamps.length < 12) {
-  //     let generateRandomChamp = champsData[Math.floor(Math.random() * champsData.length)];
-
-  //     if (!gameRandomChamps.includes(generateRandomChamp)){
-  //       gameRandomChamps.push(generateRandomChamp);
-  //     }
-
-      // console.log(gameRandomChamps)
-  //   }
-  // }
-
-
-  const [champ, setChamp] = useState("");
+  const [chosenChamps, setChamp] = useState([]);
 
   const handleChampClick = (e) => {
     let champName = e.target.alt;
-
-    if (champ === champName) {
+      setChamp([...chosenChamps, champName]);
+    if (chosenChamps.includes(champName)) {
       gameOver()
     } else {
-      setChamp(champName)
-      setGameStatus({ ...gameStatus, message:"You guessed correctly!"})
-      setGameStatus({ ...gameStatus, gameScore:gameStatus.gameScore + 1})
-
-
+      console.log(champName);
+      setGameStatus({ 
+      ...gameStatus, 
+      message:"You guessed correctly!",
+      gameScore:gameStatus.gameScore + 1})
     }
-  }
+  }      
 
   const gameOver = () => {
     console.log("Game Over");
 
-    setGameStatus({ ...gameStatus, message:"You guessed incorrectly!"});
-    setGameStatus({ ...gameStatus, gameScore:gameStatus.gameScore + 1})
+    setGameStatus({ 
+    ...gameStatus, 
+    message:"You guessed incorrectly!",
+    gameScore:0});
 
+    if (gameStatus.gameScore > gameStatus.topScore) {
+      setGameStatus({ ...gameStatus, topScore:gameStatus.gameScore})
+    }
   }
   
   return (
@@ -68,7 +57,7 @@ export default CardsGrid;
 // this seletcion of cards will stay the same for the rest of the game
 
 // first card - amy card can be clicked on
-  // this card is stored into state as an array
+  // this card is stored into state as current champ
   // score goes up by one 
   // top score is updated if score is higher than top score
 // 12 cards shuffle after each click
