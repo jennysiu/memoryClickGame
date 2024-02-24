@@ -24,14 +24,19 @@ function CardsGrid( { gameStatus, setGameStatus} ) {
   const gameOver = () => {
     console.log("Game Over");
 
+    const newTopScore = gameStatus.gameScore > gameStatus.topScore ? gameStatus.gameScore : gameStatus.topScore;
+
     setGameStatus({ 
     ...gameStatus, 
     message:"You guessed incorrectly!",
-    gameScore:0});
+    gameScore: 0,
+    topScore: newTopScore
+    })
 
-    if (gameStatus.gameScore > gameStatus.topScore) {
-      setGameStatus({ ...gameStatus, topScore:gameStatus.gameScore})
-    }
+    
+    ;
+
+
   }
   
   return (
