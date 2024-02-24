@@ -11,13 +11,19 @@ import Header from './components/Header.jsx';
 import CardsGrid from './components/CardsGrid.jsx';
 
 function App() {
-  // const [count, setCount] = useState(0)
+
+  const [gameStatus, setGameStatus] = useState({
+    gameScore: 0,
+    topScore: 0,
+    message: "Click on an image to begin!"
+  })
+
 
   return (
     <>
-      <Navbar />
+      <Navbar gameStatus={gameStatus} setGameStatus={setGameStatus}/>
       <Header />
-      <CardsGrid />
+      <CardsGrid gameStatus={gameStatus} setGameStatus={setGameStatus}/>
 
     </>
   )

@@ -1,27 +1,58 @@
-import champsData from "../data/champions.json"
+import React, { useState } from 'react';
+
+// import champsData from "../data/champions.json"
+import gameRandomChamps from '../utils/champCards';
 import "./styling/CardsGrid.css"
 
-function CardsGrid() {
+function CardsGrid( { gameStatus, setGameStatus} ) {
   // generate 12 random numbers from list of champs in json file
-  let gameRandomChamps = [];
+  // let gameRandomChamps = [];
 
-  while (gameRandomChamps.length < 12) {
-    let generateRandomChamp = champsData[Math.floor(Math.random() * champsData.length)];
+  // const startGame = () => {
+  //     while (gameRandomChamps.length < 12) {
+  //     let generateRandomChamp = champsData[Math.floor(Math.random() * champsData.length)];
 
-    if (!gameRandomChamps.includes(generateRandomChamp)){
-      gameRandomChamps.push(generateRandomChamp);
+  //     if (!gameRandomChamps.includes(generateRandomChamp)){
+  //       gameRandomChamps.push(generateRandomChamp);
+  //     }
+
+      // console.log(gameRandomChamps)
+  //   }
+  // }
+
+
+  const [champ, setChamp] = useState("");
+
+  const handleChampClick = (e) => {
+    let champName = e.target.alt;
+
+    if (champ === champName) {
+      gameOver()
+    } else {
+      setChamp(champName)
+      setGameStatus({ ...gameStatus, message:"You guessed correctly!"})
+      setGameStatus({ ...gameStatus, gameScore:gameStatus.gameScore + 1})
+
+
     }
   }
 
-  console.log(champsData);
-  console.log(gameRandomChamps);
+  const gameOver = () => {
+    console.log("Game Over");
+
+    setGameStatus({ ...gameStatus, message:"You guessed incorrectly!"});
+    setGameStatus({ ...gameStatus, gameScore:gameStatus.gameScore + 1})
+
+  }
   
   return (
     <>  
       <div className="cards-grid">
+        {/* <button onClick={startGame}>Start Game</button> */}
+        
         {gameRandomChamps.map((champ, index) => (
           <div className="card" key={index}>
-            <img src={champ.icon} alt={champ.name} />
+            <img src={champ.icon} alt={champ.name} onClick={handleChampClick}/>
           </div>
         ))}
       </div>
