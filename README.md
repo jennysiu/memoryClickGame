@@ -1,1 +1,3 @@
 # memoryClickGame
+TO DO:
+- Styling
