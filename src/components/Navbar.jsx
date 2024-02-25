@@ -1,5 +1,6 @@
-function Navbar() {
+function Navbar( {gameStatus} ) {
   return (
+    
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Memory Clicky Game</a>
@@ -8,9 +9,9 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li>Click on an image to begin!</li>
-            <li>Score: </li>
-            <li> | Top Score: </li>
+            <li>{gameStatus.message}</li>
+            <li>Score: {gameStatus.gameScore} </li>
+            <li> | Top Score: {gameStatus.topScore}</li>
           </ul>
         </div>
       </nav>

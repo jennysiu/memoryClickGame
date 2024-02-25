@@ -1,27 +1,59 @@
-import champsData from "../data/champions.json"
+import React, { useState } from 'react';
 
-function CardsGrid() {
-  // generate 12 random numbers from list of champs in json file
-  let gameRandomChamps = [];
+// import champsData from "../data/champions.json"
+import gameRandomChamps from '../utils/champCards';
+import "./styling/CardsGrid.css"
 
-  while (gameRandomChamps.length < 12) {
-    let generateRandomChamp = champsData[Math.floor(Math.random() * champsData.length)];
+function CardsGrid( { gameStatus, setGameStatus} ) {
+  const [chosenChamps, setChamp] = useState([]);
 
-    if (!gameRandomChamps.includes(generateRandomChamp)){
-      gameRandomChamps.push(generateRandomChamp);
+  const handleChampClick = (e) => {
+    let champName = e.target.alt;
+      setChamp([...chosenChamps, champName]);
+    if (chosenChamps.includes(champName)) {
+      gameOver()
+    } else {
+      console.log(champName);
+      setGameStatus({ 
+      ...gameStatus, 
+      message:"You guessed correctly!",
+      gameScore:gameStatus.gameScore + 1})
+      shuffleArray(gameRandomChamps)
+    }
+  }
+  
+  // function to shuffle cards after each click
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      // Generate a random index from 0 to i
+      const j = Math.floor(Math.random() * (i + 1));
+      
+      // Swap elements at indices i and j
+      [array[i], array[j]] = [array[j], array[i]];
     }
   }
 
-  console.log(champsData);
-  console.log(gameRandomChamps);
+  const gameOver = () => {
+    console.log("Game Over");
 
+    const newTopScore = gameStatus.gameScore > gameStatus.topScore ? gameStatus.gameScore : gameStatus.topScore;
+
+    setGameStatus({ 
+    ...gameStatus, 
+    message:"You guessed incorrectly!",
+    gameScore: 0,
+    topScore: newTopScore
+    });
+  }
   
   return (
     <>  
       <div className="cards-grid">
+        {/* <button onClick={startGame}>Start Game</button> */}
+        
         {gameRandomChamps.map((champ, index) => (
           <div className="card" key={index}>
-            <img src={champ.icon} alt={champ.name} />
+            <img src={champ.icon} alt={champ.name} onClick={handleChampClick}/>
           </div>
         ))}
       </div>
@@ -32,12 +64,12 @@ function CardsGrid() {
 export default CardsGrid;
 
 // psuedo:
-// create a random grid of cards of 12 (out of 240 152)
+// create a random grid of cards of 12 (out of 152)
 // each card has a unique image and ID
 // this seletcion of cards will stay the same for the rest of the game
 
 // first card - amy card can be clicked on
-  // this card is stored into state as an array
+  // this card is stored into state as current champ
   // score goes up by one 
   // top score is updated if score is higher than top score
 // 12 cards shuffle after each click
