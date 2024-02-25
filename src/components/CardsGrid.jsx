@@ -18,8 +18,20 @@ function CardsGrid( { gameStatus, setGameStatus} ) {
       ...gameStatus, 
       message:"You guessed correctly!",
       gameScore:gameStatus.gameScore + 1})
+      shuffleArray(gameRandomChamps)
     }
-  }      
+  }
+  
+  // function to shuffle cards after each click
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      // Generate a random index from 0 to i
+      const j = Math.floor(Math.random() * (i + 1));
+      
+      // Swap elements at indices i and j
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
 
   const gameOver = () => {
     console.log("Game Over");
@@ -31,12 +43,7 @@ function CardsGrid( { gameStatus, setGameStatus} ) {
     message:"You guessed incorrectly!",
     gameScore: 0,
     topScore: newTopScore
-    })
-
-    
-    ;
-
-
+    });
   }
   
   return (
@@ -57,7 +64,7 @@ function CardsGrid( { gameStatus, setGameStatus} ) {
 export default CardsGrid;
 
 // psuedo:
-// create a random grid of cards of 12 (out of 240 152)
+// create a random grid of cards of 12 (out of 152)
 // each card has a unique image and ID
 // this seletcion of cards will stay the same for the rest of the game
 
