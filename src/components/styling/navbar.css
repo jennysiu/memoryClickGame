@@ -26,6 +26,11 @@ ul {
   color: var(--text);
 }
 
+.navbar-brand:hover {
+  font-size: 1.5em;
+  color: var(--summoners-gold);
+}
+
 /* correct answer */
 #correct-answer {
   color: var(--zaun-green)
