@@ -1,0 +1,27 @@
+.navbar {
+  padding: 1em;
+  background-color: var(--nav) !important;
+  border-bottom: 3px solid #191919;
+}
+
+#navbar-items-box {
+  display: inline-block !important;
+  /* justify-content: space-between; */
+}
+
+ul {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  
+}
+
+.list-item {
+  margin: 0 1em ;
+  font-size: 1.5em;
+}
+
+.navbar-brand {
+  font-size: 1.5em;
+  color: var(--text);
+}
