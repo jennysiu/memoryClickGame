@@ -1,17 +1,26 @@
+import "./styling/navbar.css"
+
 function Navbar( {gameStatus} ) {
+  const answerResult = (gameStatus) => {
+    if (gameStatus.message === "You guessed correctly!"){
+      return "correct-answer"
+    } else if (gameStatus.message === "You guessed incorrectly!"){
+      return "wrong-answer"
+    }
+  }
+  
   return (
     
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Memory Clicky Game</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li>{gameStatus.message}</li>
-            <li>Score: {gameStatus.gameScore} </li>
-            <li> | Top Score: {gameStatus.topScore}</li>
+        <div className="collapse navbar-collapse" id="navbar-items-box">
+          <ul className="navbar-nav navbar-list">
+            <a className="navbar-brand" href="#">Memory Clicky Game</a>
+            <li 
+            className="list-item"
+            id={answerResult(gameStatus)}
+            >{gameStatus.message}</li>
+            <li className="list-item">Score: {gameStatus.gameScore} | Top Score: {gameStatus.topScore}</li>
           </ul>
         </div>
       </nav>
