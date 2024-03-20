@@ -1,6 +1,14 @@
 import "./styling/navbar.css"
 
 function Navbar( {gameStatus} ) {
+  const answerResult = (gameStatus) => {
+    if (gameStatus.message === "You guessed correctly!"){
+      return "correct-answer"
+    } else if (gameStatus.message === "You guessed incorrectly!"){
+      return "wrong-answer"
+    }
+  }
+  
   return (
     
     <>
@@ -10,7 +18,7 @@ function Navbar( {gameStatus} ) {
             <a className="navbar-brand" href="#">Memory Clicky Game</a>
             <li 
             className="list-item"
-            id="game-status-msg"
+            id={answerResult(gameStatus)}
             >{gameStatus.message}</li>
             <li className="list-item">Score: {gameStatus.gameScore} | Top Score: {gameStatus.topScore}</li>
           </ul>
