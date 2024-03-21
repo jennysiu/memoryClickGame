@@ -7,7 +7,7 @@ Clicky Game is a dynamic memory game built with React. Designed to test and enha
 
 ## Installation/Usage
 
-No installation is requred, you can play the game via the deployed link here: [https://jennysiu.github.io/memoryClickGame/](https://memoryclickygame.netlify.app/)
+No installation is requred, you can play the game via the deployed link here: (https://memoryclickygame.netlify.app/)
 
 Screenshot of deployed link: ![Screenshot of deployed link](src/assets/images/app-demo.png)
 
